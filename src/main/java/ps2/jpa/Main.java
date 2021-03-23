@@ -25,6 +25,38 @@ public class Main
     public void run(String... args) {
         print("\n## GERENCIADOR DE TITULARES ##");
         
+        this.criar();
+        this.lerTodos();
+        this.lerUm();
+        
         print("\n## FIM DO PROGRAMA! ##");
+    }
+    
+    private void criar() {
+        long nro = inputLong("\n## Número do titular: ");
+        String nome = inputString("\n## Nome do titular: ");
+        String rg = inputString("\n## RG do titular: ");
+        String cpf = inputString("\n## CPF do titular: ");
+        Titular t = new Titular(nro, nome, rg, cpf);
+        titularRepo.save(t);
+        print("\n## Titular cadastrado!");
+    }
+    
+    private void lerTodos() {
+        Iterable<Titular> titulares = titularRepo.findAll();
+        print("\n## Lista dos titulares: ");
+        for(Titular t: titulares) {
+            print(String.format("- Número: %d, Nome: %s, RG: %s, CPF: %s", t.getNroTitular(), t.getNome(), t.getRg(), t.getCpf()));
+        }
+    }
+    
+    private void lerUm() {
+        long nro = inputLong("\n## Número do titular: ");
+        Optional<Titular> opt = titularRepo.findById(nro);
+        if(opt.isPresent()) {
+            Titular t = opt.get();
+            print(String.format("- Número: %d, Nome: %s, RG: %s, CPF: %s", t.getNroTitular(), t.getNome(), t.getRg(), t.getCpf()));
+        }
+        
     }
 }

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Table(name="titulares")
 public class Titular {
     @Id
-    private long nroTitular;
+    private long nroTitular; //nro_titular
     private String nome;
     private String rg;
     private String cpf;
@@ -29,5 +29,5 @@ public class Titular {
     public String getRg() { return rg; }
     public void setRg(String r) { rg = r; }
     public String getCpf() { return cpf; }
-    public void setCpf(String c) { cpf = c; }    
+    public void setCpf(String c) { cpf = c; } 
 }
